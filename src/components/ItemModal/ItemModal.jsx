@@ -1,14 +1,22 @@
-import closeIcon from "../../assets/day/close.svg";
 import "./ItemModal.css";
 
 function ItemModal({ activeModal, onClose, card }) {
+  if (activeModal !== "preview" || !card) {
+    return null;
+  }
+
   return (
-    <div className={`modal ${activeModal === "preview" && "modal_opened"}`}>
+    <div className="modal modal_opened">
       <div className="modal__content modal__content_type_image">
-        <button onClick={onClose} type="button" className="modal__close">
-          <img src={closeIcon} alt="close" className="modal__close-icon"></img>
-        </button>
-        <img src={card.link} alt="" className="modal__image" />
+        <button
+          onClick={onClose}
+          type="button"
+          className="modal__close"
+          aria-label="Close modal"
+        />
+
+        <img src={card.link} alt={card.name} className="modal__image" />
+
         <div className="modal__footer">
           <h2 className="modal__caption">{card.name}</h2>
           <p className="modal__weather">Weather: {card.weather}</p>

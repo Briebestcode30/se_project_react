@@ -2,10 +2,15 @@
   position: absolute;
   top: 12px;
   right: 12px;
+  width: 24px;
+  height: 24px;
+
   border: none;
-  background: transparent;
+  background: transparent url("../../assets/day/close.svg") center no-repeat;
+  background-size: contain;
+
   cursor: pointer;
-  padding: 4px 8px;
+  padding: 0;
 }
 
 .modal__close-icon {
