@@ -1,0 +1,22 @@
+.modal__close {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  padding: 4px 8px;
+}
+
+.modal__close-icon {
+  width: 24px;
+  height: 24px;
+  background: url("../../assets/day/close.svg");
+}
+
+.modal__caption {
+  display: flex;
+  margin: auto;
+  gap: 20px;
+  font-family: Cabinet Grotesk;
+}
