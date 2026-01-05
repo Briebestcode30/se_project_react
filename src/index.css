@@ -1,1 +1,2 @@
-@import "./vendor/normalize.css";
+/* Reset styles */
+@import "../vendor/normalize.css"; /* Corrected path to project root vendor folder */

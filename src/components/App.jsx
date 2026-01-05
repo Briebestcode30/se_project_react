@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 
 import "./App.css";
-import { coordinates, APIkey } from "../utils/constants";
+import { coordinates, apiKey } from "../utils/constants";
 
 import Header from "./Header/Header";
 import Main from "./Main/Main";
@@ -20,24 +20,28 @@ function App() {
   const [activeModal, setActiveModal] = useState("");
   const [selectedCard, setSelectedCard] = useState({});
 
-  // Initialize clothing items as empty array
+  // Initialize clothing items as empty array (can be populated dynamically later)
   const [clothingItems, setClothingItems] = useState([]);
 
+  // Handle opening preview modal for a card
   const handleCardClick = (card) => {
     setActiveModal("preview");
     setSelectedCard(card);
   };
 
+  // Handle opening add-garment modal
   const handleAddClick = () => {
     setActiveModal("add-garment");
   };
 
+  // Close any open modal
   const closeActiveModal = () => {
     setActiveModal("");
   };
 
+  // Fetch weather on component mount
   useEffect(() => {
-    getWeather(coordinates, APIkey)
+    getWeather(coordinates, apiKey) // ✅ use correct camelCase variable
       .then((data) => {
         const filteredData = filterWeatherData(data);
         setWeatherData(filteredData);
@@ -59,6 +63,7 @@ function App() {
 
       <Footer />
 
+      {/* Modal for adding new garment */}
       <ModalWithForm
         title="New Garment"
         buttonText="Add Garment"
@@ -134,6 +139,7 @@ function App() {
         </fieldset>
       </ModalWithForm>
 
+      {/* Item preview modal */}
       <ItemModal
         activeModal={activeModal}
         card={selectedCard}

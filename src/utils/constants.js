@@ -1,26 +1,30 @@
+// src/utils/constants.js
+
+// Weather icon options mapped to OpenWeather API conditions
 export const weatherOptions = [
   {
     day: true,
-    condition: "clear",
+    condition: "clear", // OpenWeather: "Clear"
     url: new URL("../assets/day/clear.svg", import.meta.url).href,
   },
   {
     day: true,
-    condition: "cloudy",
+    condition: "clouds", // OpenWeather: "Clouds"
     url: new URL("../assets/day/cloudy.svg", import.meta.url).href,
   },
   {
     day: false,
     condition: "clear",
-    url: new URL("../assets/night/clear.svg", import.meta.url).href,
+    url: new URL("../assets/night/dark-clear.svg", import.meta.url).href, // fixed filename
   },
   {
     day: false,
-    condition: "cloudy",
-    url: new URL("../assets/night/cloudy.svg", import.meta.url).href,
+    condition: "clouds",
+    url: new URL("../assets/night/dark-cloudy.svg", import.meta.url).href, // fixed filename
   },
 ];
 
+// Default icons if condition is missing or unmatched
 export const defaultWeatherOptions = {
   day: {
     url: new URL("../assets/day/default.svg", import.meta.url).href,
@@ -30,6 +34,7 @@ export const defaultWeatherOptions = {
   },
 };
 
+// Default clothing items (used if you want)
 export const defaultClothingItems = [
   {
     _id: 1,
@@ -123,9 +128,11 @@ export const defaultClothingItems = [
   },
 ];
 
+// Coordinates for weather API
 export const coordinates = {
   latitude: 35.6485769,
   longitude: -80.4684191,
 };
 
-export const APIkey = "a4ad75474013fa969f7129087da607f4";
+// OpenWeather API key (camelCase)
+export const apiKey = "a4ad75474013fa969f7129087da607f4";
