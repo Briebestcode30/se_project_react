@@ -25,3 +25,7 @@
   gap: 20px;
   font-family: Cabinet Grotesk;
 }
+
+.modal__image {
+  max-width: 430px;
+}
