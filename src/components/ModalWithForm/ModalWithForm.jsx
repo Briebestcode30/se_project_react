@@ -23,6 +23,7 @@ function ModalWithForm({ children, buttonText, title, isOpen, onClose }) {
           {children}
 
           <button type="submit" className="modal__submit">
+            Add garment
             {buttonText}
           </button>
         </form>

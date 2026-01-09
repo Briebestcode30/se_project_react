@@ -35,13 +35,16 @@
 /* Close button */
 .modal__close {
   position: absolute;
-  top: 20px;
+  top: 8px;
   right: 24px;
-  background: none;
   border: none;
   font-size: 14px;
   cursor: pointer;
-  background: url(./assets/day/close.svg);
+  font-family: Cabinet Grotesk;
+  font-weight: 700;
+  width: 92px;
+  height: 20px;
+  left: 420px;
 }
 
 .modal__form {

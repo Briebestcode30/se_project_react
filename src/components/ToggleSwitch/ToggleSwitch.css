@@ -6,7 +6,8 @@
   cursor: pointer;
   overflow: hidden;
   position: relative;
-  left: 739px;
+  left: 709px;
+  top: 5px;
 }
 
 .toggle-switch__checkbox {
@@ -25,7 +26,7 @@
 
 .toggle-switch__text {
   position: absolute;
-  color: grey;
+  color: white;
   top: 5px;
 }
 

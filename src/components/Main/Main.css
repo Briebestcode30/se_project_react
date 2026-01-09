@@ -6,3 +6,12 @@
   list-style-type: none;
   gap: 21px;
 }
+
+.cards__text {
+  font-family: Cabinet Grotesk;
+  font-weight: 700;
+  width: 330px;
+  height: 25px;
+  position: relative;
+  color: rgba(0, 0, 0, 1);
+}

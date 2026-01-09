@@ -8,10 +8,18 @@
   position: absolute;
   top: 15px;
   margin: 0;
-  justify-content: center;
+  left: 129px;
+  font-weight: 700;
+  line-height: 20px;
+  color: rgba(0, 0, 0, 0.6);
+  background-color: white;
+  border-radius: 16px;
+  box-sizing: border-box;
 }
 
 .card__image {
   width: 100%;
   cursor: pointer;
+  border-radius: 16px;
+  box-sizing: border-box;
 }
