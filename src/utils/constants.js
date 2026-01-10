@@ -35,7 +35,7 @@ export const defaultWeatherOptions = {
 };
 
 // Default clothing items (used if you want)
-export const defaultClothingItems = [
+export const defaultclothingitems = [
   {
     _id: 1,
     name: "Boot",

@@ -1,6 +1,13 @@
 import "./ModalWithForm.css";
 
-function ModalWithForm({ children, buttonText, title, isOpen, onClose }) {
+function ModalWithForm({
+  children,
+  buttonText = "Save",
+  title,
+  isOpen,
+  onClose,
+  onSubmit,
+}) {
   // Don't render the modal if it's not open
   if (!isOpen) {
     return null;
@@ -19,11 +26,10 @@ function ModalWithForm({ children, buttonText, title, isOpen, onClose }) {
           aria-label="Close modal"
         />
 
-        <form className="modal__form">
+        <form onSubmit={onSubmit} className="modal__form">
           {children}
 
           <button type="submit" className="modal__submit">
-            Add garment
             {buttonText}
           </button>
         </form>

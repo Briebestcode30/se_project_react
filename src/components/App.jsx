@@ -7,7 +7,8 @@ import Footer from "./Footer/Footer";
 import ItemModal from "./ItemModal/ItemModal";
 import { getWeather, filterWeatherData } from "../utils/weatherApi";
 import CurrentTemperatureUnitContext from "../contexts/CurrentTemperatureUnitContext";
-import AddItemModal from "../components/AddItemModal";
+import AddItemModal from "./AddItemModal";
+import { defaultclothingitems } from "../utils/clothingitems";
 
 function App() {
   const [weatherData, setWeatherData] = useState({
@@ -22,16 +23,27 @@ function App() {
   const [activeModal, setActiveModal] = useState("");
   const [selectedCard, setSelectedCard] = useState({});
   const [currentTemperatureUnit, setCurrentTemperatureUnit] = useState("F");
+  const [clothingItems, setClothingItems] = useState(defaultclothingitems);
 
   const handleToggleSwitchChange = () => {
     setCurrentTemperatureUnit(currentTemperatureUnit === "F" ? "C" : "F");
   };
 
-  const [clothingItems, setClothingItems] = useState([]);
-
   const handleCardClick = (card) => {
     setActiveModal("preview");
     setSelectedCard(card);
+  };
+
+  const onAddItem = (inputValues) => {
+    const newCardData = {
+      _id: Date.now().toString(),
+      name: inputValues.name,
+      link: inputValues.imageUrl,
+      weather: inputValues.weatherType,
+    };
+
+    setClothingItems([...clothingItems, newCardData]);
+    closeActiveModal();
   };
 
   const handleAddClick = () => {
@@ -51,6 +63,7 @@ function App() {
       })
       .catch(console.error);
   }, []);
+
   if (!isWeatherDataLoaded) {
     return <p>LOADING...</p>;
   }
@@ -66,15 +79,15 @@ function App() {
           <Main
             weatherData={weatherData}
             handleCardClick={handleCardClick}
-            clothingItems={clothingItems}
+            clothingitems={clothingItems}
           />
         </div>
         <Footer />
 
-        {/* Item preview modal */}
         <AddItemModal
           isOpen={activeModal === "add-garment"}
           onClose={closeActiveModal}
+          onAddItem={onAddItem}
         />
 
         <ItemModal
