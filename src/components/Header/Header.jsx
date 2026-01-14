@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { NavLink } from "react-router-dom";
 import "./Header.css";
 import logo from "../../assets/logo.svg";
@@ -13,7 +12,7 @@ function Header({ handleAddClick, weatherData }) {
 
   return (
     <header className="header">
-      {/* Logo now links to home */}
+      {/* Logo links to home */}
       <NavLink to="/" className="header__logo-link">
         <img className="header__logo" alt="Logo" src={logo} />
       </NavLink>

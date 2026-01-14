@@ -15,12 +15,12 @@ export const weatherOptions = [
   {
     day: false,
     condition: "clear",
-    url: new URL("../assets/night/dark-clear.svg", import.meta.url).href, // fixed filename
+    url: new URL("../assets/night/dark-clear.svg", import.meta.url).href,
   },
   {
     day: false,
     condition: "clouds",
-    url: new URL("../assets/night/dark-cloudy.svg", import.meta.url).href, // fixed filename
+    url: new URL("../assets/night/dark-cloudy.svg", import.meta.url).href,
   },
 ];
 
@@ -34,8 +34,8 @@ export const defaultWeatherOptions = {
   },
 };
 
-// Default clothing items (used if you want)
-export const defaultclothingitems = [
+// ✅ Default clothing items (camelCase)
+export const defaultClothingItems = [
   {
     _id: 1,
     name: "Boot",
@@ -134,5 +134,5 @@ export const coordinates = {
   longitude: -80.4684191,
 };
 
-// OpenWeather API key (camelCase)
+// OpenWeather API key
 export const apiKey = "a4ad75474013fa969f7129087da607f4";

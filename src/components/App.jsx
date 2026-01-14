@@ -39,6 +39,7 @@ function App() {
     setActiveModal("preview");
   };
 
+  // ✅ OPEN ADD ITEM MODAL
   const handleAddClick = () => {
     setActiveModal("add-garment");
   };
@@ -63,7 +64,6 @@ function App() {
       .catch(console.error);
   };
 
-  // ✅ DELETE ITEM HANDLER (TODO COMPLETED)
   const handleDeleteItem = (id) => {
     removeItem(id)
       .then(() => {
@@ -83,7 +83,6 @@ function App() {
 
     getItems()
       .then((data) => {
-        // ✅ Newest items first
         setClothingItems(data.reverse());
       })
       .catch(console.error);
@@ -109,6 +108,7 @@ function App() {
                   weatherData={weatherData}
                   handleCardClick={handleCardClick}
                   clothingItems={clothingItems}
+                  onAddClick={handleAddClick}
                 />
               }
             />
@@ -119,6 +119,7 @@ function App() {
                 <Profile
                   onCardClick={handleCardClick}
                   clothingItems={clothingItems}
+                  onAddClick={handleAddClick}
                 />
               }
             />
