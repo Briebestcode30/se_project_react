@@ -20,19 +20,11 @@
 }
 
 .modal__caption {
-  display: flex;
-  margin: auto;
-  gap: 20px;
+  left: 10px;
+  position: relative;
+  top: 25px;
   font-family: Cabinet Grotesk;
-  position: absolute;
-  left: 225px;
-  top: 35px;
-  font-size: 16px;
   font-weight: 700;
-  line-height: 20px;
-  width: 29px;
-  height: 20px;
-  color: rgba(0, 0, 0, 0.6);
 }
 
 .modal__image {
@@ -40,4 +32,27 @@
   position: relative;
   border-radius: 16px;
   box-sizing: border-box;
+}
+
+.modal__delete {
+  border: none;
+  position: relative;
+  top: -35px;
+  left: 335px;
+  color: rgba(255, 77, 0, 1);
+  font-family: Cabinet Grotesk;
+  font-weight: 700;
+  background: none;
+}
+
+.modal__weather {
+  left: 10px;
+  position: relative;
+  top: 18px;
+  font-family: Cabinet Grotesk;
+  font-weight: 700;
+}
+
+.modal__content_type_image {
+  overflow: hidden;
 }

@@ -1,0 +1,20 @@
+.sidebar__avatar {
+  display: flex;
+  flex-direction: row-reverse;
+  align-items: center;
+  position: relative;
+  height: 56px;
+  top: -53px;
+  left: -85px;
+  gap: 16px;
+}
+
+.sidebar__username {
+  font-size: 20px;
+  font-weight: 700;
+  white-space: nowrap;
+  font-family: Cabinet Grotesk;
+  position: relative;
+  top: -5px;
+  left: -25px;
+}

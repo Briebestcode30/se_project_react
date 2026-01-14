@@ -1,9 +1,13 @@
 import "./ItemModal.css";
 
-function ItemModal({ activeModal, onClose, card }) {
+function ItemModal({ activeModal, onClose, card, onDelete }) {
   if (activeModal !== "preview" || !card) {
     return null;
   }
+
+  const handleDelete = () => {
+    onDelete(card._id);
+  };
 
   return (
     <div className="modal modal_opened">
@@ -15,11 +19,19 @@ function ItemModal({ activeModal, onClose, card }) {
           aria-label="Close modal"
         />
 
-        <img src={card.link} alt={card.name} className="modal__image" />
+        <img src={card.imageUrl} alt={card.name} className="modal__image" />
 
         <div className="modal__footer">
           <h2 className="modal__caption">{card.name}</h2>
           <p className="modal__weather">Weather: {card.weather}</p>
+
+          <button
+            className="modal__delete"
+            type="button"
+            onClick={handleDelete}
+          >
+            Delete item
+          </button>
         </div>
       </div>
     </div>
