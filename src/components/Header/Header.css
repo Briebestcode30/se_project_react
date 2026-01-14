@@ -8,6 +8,11 @@
   margin-right: 24px;
 }
 
+.header__logo-link {
+  display: inline-block;
+  text-decoration: none;
+}
+
 .header__date-and-location {
   margin: 0;
   width: 160px;
@@ -50,7 +55,7 @@
   line-height: 100%;
   position: relative;
   top: 8px;
-  left: 25px;
+  left: 45px;
 }
 
 .header__nav-link {

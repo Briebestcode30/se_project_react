@@ -13,13 +13,17 @@ function Header({ handleAddClick, weatherData }) {
 
   return (
     <header className="header">
-      {/* TODO - set up link to home page */}
-      <img className="header__logo" alt="Logo" src={logo} />
+      {/* Logo now links to home */}
+      <NavLink to="/" className="header__logo-link">
+        <img className="header__logo" alt="Logo" src={logo} />
+      </NavLink>
+
       <p className="header__date-and-location">
         {currentDate}, {weatherData.city}
       </p>
 
       <ToggleSwitch />
+
       <button
         onClick={handleAddClick}
         type="button"
@@ -27,6 +31,7 @@ function Header({ handleAddClick, weatherData }) {
       >
         + Add Clothes
       </button>
+
       <NavLink className="header__nav-link" to="/profile">
         <div className="header__user-container">
           <p className="header__username">Terrence Tegegne</p>
