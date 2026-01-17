@@ -10,7 +10,7 @@ import Header from "./Header/Header";
 import Main from "./Main/Main";
 import Footer from "./Footer/Footer";
 import ItemModal from "./ItemModal/ItemModal";
-import AddItemModal from "./AddItemModal";
+import AddItemModal from "./AddItemModal/AddItemModal";
 import Profile from "../components/Profile/Profile";
 
 import CurrentTemperatureUnitContext from "../contexts/CurrentTemperatureUnitContext";
@@ -39,7 +39,6 @@ function App() {
     setActiveModal("preview");
   };
 
-  // ✅ OPEN ADD ITEM MODAL
   const handleAddClick = () => {
     setActiveModal("add-garment");
   };
@@ -48,6 +47,20 @@ function App() {
     setActiveModal("");
     setSelectedCard({});
   };
+
+  useEffect(() => {
+    const closeByEscape = (e) => {
+      if (e.key === "Escape") {
+        closeActiveModal();
+      }
+    };
+
+    document.addEventListener("keydown", closeByEscape);
+
+    return () => {
+      document.removeEventListener("keydown", closeByEscape);
+    };
+  }, []);
 
   const onAddItem = (inputValues) => {
     const newCardData = {

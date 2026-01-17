@@ -1,41 +1,46 @@
-# WTWR – What To Wear React App
+# What To Wear (WTWR)
 
-**WTWR** is a responsive React web application that helps users choose clothing items based on the current weather. The app fetches real-time weather data and suggests garments suitable for hot, warm, or cold conditions. Users can also add their own garments with associated weather types.
-
----
-
-## Features
-
-- Displays current weather (temperature, condition, city).
-- Dynamically suggests clothing items based on weather.
-- Clickable cards for previewing garments in a modal.
-- Add new garments via a modal form with validation.
-- Fully responsive layout for desktop and mobile.
-- Accessible buttons, forms, and images (ARIA attributes, meaningful alt text).
+**What To Wear (WTWR)** is a responsive React web application that helps users choose clothing items based on the current weather. The app fetches real-time weather data and suggests garments suitable for hot, warm, or cold conditions. Users can also add their own garments with associated weather types.
 
 ---
 
-## Technologies Used
+## 🚀 Features
 
-- **React 18** – for building interactive UI components
+- Displays current weather information (temperature, condition, city)
+- Dynamically suggests clothing items based on weather conditions
+- Clickable clothing cards that open a preview modal
+- Add new garments using a modal form with validation
+- Fully responsive layout for desktop and mobile devices
+- Accessible UI with meaningful alt text and ARIA-friendly interactions
+
+---
+
+## 🛠️ Technologies Used
+
+- **React 18** – building interactive UI components
 - **Vite** – fast development environment
-- **JavaScript (ES6+)** – core logic and API integration
-- **CSS / BEM** – component-based styling
-- **Fetch API** – retrieving weather data from OpenWeather
-- **ESLint / Prettier** – code quality and formatting
+- **JavaScript (ES6+)** – application logic and API handling
+- **CSS (BEM methodology)** – component-based styling
+- **Fetch API** – retrieving weather data from OpenWeather API
+- **ESLint & Prettier** – maintaining code quality and formatting
 
 ---
 
-## Demo
+## 🎥 Project Pitch Video
 
-![WTWR Screenshot](./screenshots/wtwr-screenshot.png)  
-_Add your screenshots or GIFs here for UI preview._
-
-[Optional Demo Video](https://example.com/demo)
+Check out [this Loom video](https://www.loom.com/share/c8fd4613af3c4bd7bf7447b310b4fe4b), where I describe the What To Wear (WTWR) project, walk through the main features, and discuss some of the challenges I faced while building it.
 
 ---
 
-## Installation
+## 🖼️ Demo
+
+![WTWR Screenshot](./screenshots/wtwr-screenshot.png)
+
+_Add screenshots or GIFs here to showcase the UI._
+
+---
+
+## 📦 Installation
 
 1. Clone the repository:
    ```bash

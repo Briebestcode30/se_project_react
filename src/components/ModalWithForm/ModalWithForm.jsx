@@ -8,7 +8,6 @@ function ModalWithForm({
   onClose,
   onSubmit,
 }) {
-  // Don't render the modal if it's not open
   if (!isOpen) {
     return null;
   }
@@ -18,7 +17,7 @@ function ModalWithForm({
       <div className="modal__content">
         <h2 className="modal__title">{title}</h2>
 
-        {/* Close button with CSS background icon */}
+        {}
         <button
           type="button"
           className="modal__close"

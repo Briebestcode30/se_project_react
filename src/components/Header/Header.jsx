@@ -12,7 +12,7 @@ function Header({ handleAddClick, weatherData }) {
 
   return (
     <header className="header">
-      {/* Logo links to home */}
+      {}
       <NavLink to="/" className="header__logo-link">
         <img className="header__logo" alt="Logo" src={logo} />
       </NavLink>

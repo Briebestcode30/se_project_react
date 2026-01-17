@@ -5,7 +5,6 @@ import { useContext } from "react";
 import CurrentTemperatureUnitContext from "../../contexts/CurrentTemperatureUnitContext";
 
 function Main({ weatherData, handleCardClick, clothingItems, onAddClick }) {
-  // ✅ Get the current temperature unit from context
   const { currentTemperatureUnit } = useContext(CurrentTemperatureUnitContext);
 
   return (

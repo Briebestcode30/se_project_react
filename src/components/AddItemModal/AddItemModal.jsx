@@ -1,5 +1,6 @@
-import { useForm } from "../hooks/useForm";
-import ModalWithForm from "./ModalWithForm/ModalWithForm";
+import { useEffect } from "react";
+import { useForm } from "../../hooks/useForm";
+import ModalWithForm from "../ModalWithForm/ModalWithForm";
 
 const AddItemModal = ({ isOpen, onAddItem, onClose }) => {
   const defaultValues = {
@@ -10,10 +11,15 @@ const AddItemModal = ({ isOpen, onAddItem, onClose }) => {
 
   const { values, setValues, handleChange } = useForm(defaultValues);
 
+  useEffect(() => {
+    if (isOpen) {
+      setValues(defaultValues);
+    }
+  }, [isOpen, setValues]);
+
   function handleSubmit(evt) {
     evt.preventDefault();
     onAddItem(values);
-    /*setValues(defaultValues);*/
   }
 
   return (
@@ -55,47 +61,25 @@ const AddItemModal = ({ isOpen, onAddItem, onClose }) => {
       <fieldset className="modal__radio-buttons">
         <legend className="modal__legend">Select the weather type:</legend>
 
-        <label htmlFor="hot" className="modal__label modal__label_type_radio">
-          <input
-            id="hot"
-            type="radio"
-            name="weatherType"
-            value="hot"
-            className="modal__radio-input"
-            checked={values.weatherType === "hot"}
-            onChange={handleChange}
-            required
-          />
-          Hot
-        </label>
-
-        <label htmlFor="warm" className="modal__label modal__label_type_radio">
-          <input
-            id="warm"
-            type="radio"
-            name="weatherType"
-            value="warm"
-            className="modal__radio-input"
-            checked={values.weatherType === "warm"}
-            onChange={handleChange}
-            required
-          />
-          Warm
-        </label>
-
-        <label htmlFor="cold" className="modal__label modal__label_type_radio">
-          <input
-            id="cold"
-            type="radio"
-            name="weatherType"
-            value="cold"
-            className="modal__radio-input"
-            checked={values.weatherType === "cold"}
-            onChange={handleChange}
-            required
-          />
-          Cold
-        </label>
+        {["hot", "warm", "cold"].map((type) => (
+          <label
+            key={type}
+            htmlFor={type}
+            className="modal__label modal__label_type_radio"
+          >
+            <input
+              id={type}
+              type="radio"
+              name="weatherType"
+              value={type}
+              className="modal__radio-input"
+              checked={values.weatherType === type}
+              onChange={handleChange}
+              required
+            />
+            {type.charAt(0).toUpperCase() + type.slice(1)}
+          </label>
+        ))}
       </fieldset>
     </ModalWithForm>
   );
