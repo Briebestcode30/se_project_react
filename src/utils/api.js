@@ -4,7 +4,7 @@ const headers = {
   "Content-Type": "application/json",
 };
 
-// Exported so other modules can use it
+// Handle server response
 export const handleServerResponse = (res) => {
   return res.ok ? res.json() : Promise.reject(`Error: ${res.status}`);
 };
@@ -23,10 +23,32 @@ export const addItem = ({ name, imageUrl, weather }) => {
   }).then(handleServerResponse);
 };
 
-// DELETE an item by ID
+// DELETE an item
 export const removeItem = (itemId) => {
   return fetch(`${baseUrl}/items/${itemId}`, {
     method: "DELETE",
     headers,
+  }).then(handleServerResponse);
+};
+
+// ADD like
+export const addCardLike = (id, token) => {
+  return fetch(`${baseUrl}/items/${id}/likes`, {
+    method: "PUT",
+    headers: {
+      ...headers,
+      Authorization: `Bearer ${token}`,
+    },
+  }).then(handleServerResponse);
+};
+
+// REMOVE like
+export const removeCardLike = (id, token) => {
+  return fetch(`${baseUrl}/items/${id}/likes`, {
+    method: "DELETE",
+    headers: {
+      ...headers,
+      Authorization: `Bearer ${token}`,
+    },
   }).then(handleServerResponse);
 };

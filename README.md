@@ -15,6 +15,14 @@
 
 ---
 
+## Backend Repository
+
+The backend for this project contains the server, API routes, user authentication, and database setup. You can find it here:
+
+🔗 https://github.com/Briebestcode30/se_project_express
+
+---
+
 ## 🛠️ Technologies Used
 
 - **React 18** – building interactive UI components
