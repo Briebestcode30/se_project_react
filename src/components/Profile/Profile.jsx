@@ -8,11 +8,13 @@ export default function Profile({
   onAddClick,
   setActiveModal,
   onSignOut,
+  onCardLike,
 }) {
   return (
     <section className="Profile">
+      {" "}
       <SideBar />
-
+      ```
       <div className="Profile__buttons">
         <button
           className="Profile__edit-btn"
@@ -25,11 +27,11 @@ export default function Profile({
           Sign out
         </button>
       </div>
-
       <ClothesSection
-        onCardClick={onCardClick}
         clothingItems={clothingItems}
+        onCardClick={onCardClick}
         onAddClick={onAddClick}
+        onCardLike={onCardLike}
       />
     </section>
   );

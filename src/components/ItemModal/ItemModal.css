@@ -13,12 +13,6 @@
   padding: 0;
 }
 
-.modal__close-icon {
-  width: 24px;
-  height: 24px;
-  background: url("../../assets/day/close.svg");
-}
-
 .modal__caption {
   left: 10px;
   position: relative;

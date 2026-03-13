@@ -10,6 +10,7 @@ import {
   removeItem,
   addCardLike,
   removeCardLike,
+  updateUser,
 } from "../utils/api";
 import { register, login, checkToken } from "../utils/auth";
 
@@ -71,13 +72,16 @@ function App() {
   };
 
   const onAddItem = (inputValues) => {
+    const token = localStorage.getItem("jwt");
+    if (!token) return console.error("Missing auth token");
+
     const newCardData = {
       name: inputValues.name,
       imageUrl: inputValues.imageUrl,
       weather: inputValues.weatherType,
     };
 
-    addItem(newCardData)
+    addItem(newCardData, token)
       .then((data) => {
         setClothingItems((prev) => [data, ...prev]);
         closeActiveModal();
@@ -86,7 +90,10 @@ function App() {
   };
 
   const handleDeleteItem = (id) => {
-    removeItem(id)
+    const token = localStorage.getItem("jwt");
+    if (!token) return console.error("Missing auth token");
+
+    removeItem(id, token)
       .then(() => {
         setClothingItems((prev) => prev.filter((item) => item._id !== id));
         closeActiveModal();
@@ -161,7 +168,6 @@ function App() {
       .catch(console.error);
   };
 
-  // Handle login
   const handleLogin = ({ email, password }) => {
     login({ email, password })
       .then((res) => {
@@ -176,15 +182,9 @@ function App() {
 
   const handleUpdateProfile = ({ name, avatar }) => {
     const token = localStorage.getItem("jwt");
-    fetch("/users/me", {
-      method: "PATCH",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${token}`,
-      },
-      body: JSON.stringify({ name, avatar }),
-    })
-      .then((res) => res.json())
+    if (!token) return console.error("Missing auth token");
+
+    updateUser({ name, avatar }, token)
       .then((updatedUser) => {
         setCurrentUser(updatedUser);
         setActiveModal("");
@@ -207,7 +207,6 @@ function App() {
               setActiveModal={setActiveModal}
               isLoggedIn={isLoggedIn}
             />
-
             <Routes>
               <Route
                 path="/"
@@ -221,7 +220,6 @@ function App() {
                   />
                 }
               />
-
               <Route
                 path="/profile"
                 element={
@@ -232,40 +230,35 @@ function App() {
                       onAddClick={handleAddClick}
                       setActiveModal={setActiveModal}
                       onSignOut={handleSignOut}
+                      onCardLike={handleCardLike}
                     />
                   </ProtectedRoute>
                 }
               />
             </Routes>
           </div>
-
           <Footer />
-
           <AddItemModal
             isOpen={activeModal === "add-garment"}
             onClose={closeActiveModal}
             onAddItem={onAddItem}
           />
-
           <ItemModal
             activeModal={activeModal}
             card={selectedCard}
             onClose={closeActiveModal}
             onDelete={handleDeleteItem}
           />
-
           <RegisterModal
             isOpen={activeModal === "register"}
             onClose={closeActiveModal}
             onRegister={handleRegister}
           />
-
           <LoginModal
             isOpen={activeModal === "login"}
             onClose={closeActiveModal}
             onLogin={handleLogin}
           />
-
           <EditProfileModal
             isOpen={activeModal === "edit-profile"}
             onClose={closeActiveModal}
