@@ -128,11 +128,9 @@ export const defaultClothingItems = [
   },
 ];
 
-// Coordinates for weather API
 export const coordinates = {
   latitude: 35.6485769,
   longitude: -80.4684191,
 };
 
-// OpenWeather API key
 export const apiKey = "a4ad75474013fa969f7129087da607f4";
