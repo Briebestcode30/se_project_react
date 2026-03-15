@@ -1,29 +1,43 @@
-import { handleServerResponse, base_url } from "./api";
+// src/utils/auth.js
+import { baseUrl } from "./api";
 
-export const register = ({ name, avatar, email, password }) => {
-  return fetch(`${base_url}/signup`, {
+// Helper to handle fetch responses
+const handleServerResponse = async (res) => {
+  if (res.ok) return res.json();
+  const text = await res.text();
+  throw new Error(`Error ${res.status}: ${text}`);
+};
+
+export const register = async ({ name, avatar, email, password }) => {
+  const res = await fetch(`${baseUrl}/signup`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ name, avatar, email, password }),
-  }).then(handleServerResponse);
+  });
+
+  return handleServerResponse(res);
 };
 
-export const login = ({ email, password }) => {
-  return fetch(`${base_url}/signin`, {
+export const login = async ({ email, password }) => {
+  const res = await fetch(`${baseUrl}/signin`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ email, password }),
-  }).then(handleServerResponse);
+  });
+
+  return handleServerResponse(res);
 };
 
-export const checkToken = (token) => {
-  if (!token) return Promise.reject("Missing auth token");
+export const checkToken = async (token) => {
+  if (!token) throw new Error("Missing auth token");
 
-  return fetch(`${base_url}/users/me`, {
+  const res = await fetch(`${baseUrl}/users/me`, {
     method: "GET",
     headers: {
       "Content-Type": "application/json",
       Authorization: `Bearer ${token}`,
     },
-  }).then(handleServerResponse);
+  });
+
+  return handleServerResponse(res);
 };

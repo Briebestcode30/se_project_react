@@ -14,7 +14,6 @@ export default function Profile({
     <section className="Profile">
       {" "}
       <SideBar />
-      ```
       <div className="Profile__buttons">
         <button
           className="Profile__edit-btn"

@@ -5,8 +5,9 @@ import logo from "../../assets/logo.svg";
 import ToggleSwitch from "../ToggleSwitch/ToggleSwitch";
 import CurrentUserContext from "../../contexts/CurrentUserContext";
 
-function Header({ handleAddClick, weatherData, setActiveModal }) {
+function Header({ handleAddClick, weatherData, setActiveModal, isLoggedIn }) {
   const currentUser = useContext(CurrentUserContext);
+
   const currentDate = new Date().toLocaleString("default", {
     month: "long",
     day: "numeric",
@@ -15,7 +16,7 @@ function Header({ handleAddClick, weatherData, setActiveModal }) {
   return (
     <header className="header">
       <NavLink to="/" className="header__logo-link">
-        <img className="header__logo" alt="Logo" src={logo} />
+        <img src={logo} alt="WTWR logo" className="header__logo" />
       </NavLink>
 
       <p className="header__date-and-location">
@@ -24,20 +25,21 @@ function Header({ handleAddClick, weatherData, setActiveModal }) {
 
       <ToggleSwitch />
 
-      {currentUser ? (
+      {isLoggedIn ? (
         <>
           <button
-            onClick={handleAddClick}
             type="button"
             className="header__add-clothes-btn"
+            onClick={handleAddClick}
           >
             + Add Clothes
           </button>
 
-          <NavLink className="header__nav-link" to="/profile">
+          <NavLink to="/profile" className="header__nav-link">
             <div className="header__user-container">
-              <p className="header__username">{currentUser.name}</p>
-              {currentUser.avatar ? (
+              <p className="header__username">{currentUser?.name}</p>
+
+              {currentUser?.avatar ? (
                 <img
                   src={currentUser.avatar}
                   alt={currentUser.name}
@@ -45,7 +47,7 @@ function Header({ handleAddClick, weatherData, setActiveModal }) {
                 />
               ) : (
                 <div className="header__avatar-placeholder">
-                  {currentUser.name[0].toUpperCase()}
+                  {currentUser?.name?.[0]?.toUpperCase()}
                 </div>
               )}
             </div>
@@ -54,16 +56,17 @@ function Header({ handleAddClick, weatherData, setActiveModal }) {
       ) : (
         <div className="header__auth-buttons">
           <button
-            className="header__login-btn"
-            onClick={() => setActiveModal("login")}
-          >
-            Login
-          </button>
-          <button
             className="header__register-btn"
             onClick={() => setActiveModal("register")}
           >
-            Register
+            Sign Up
+          </button>
+
+          <button
+            className="header__login-btn"
+            onClick={() => setActiveModal("login")}
+          >
+            Log In
           </button>
         </div>
       )}

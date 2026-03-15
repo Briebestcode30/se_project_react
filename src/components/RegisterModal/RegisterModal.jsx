@@ -1,7 +1,12 @@
 import { useState } from "react";
 import ModalWithForm from "../ModalWithForm/ModalWithForm";
 
-export default function RegisterModal({ isOpen, onClose, onRegister }) {
+export default function RegisterModal({
+  isOpen,
+  onClose,
+  onRegister,
+  setActiveModal,
+}) {
   const [name, setName] = useState("");
   const [avatar, setAvatar] = useState("");
   const [email, setEmail] = useState("");
@@ -10,6 +15,10 @@ export default function RegisterModal({ isOpen, onClose, onRegister }) {
   const handleSubmit = (e) => {
     e.preventDefault();
     onRegister({ name, avatar, email, password });
+  };
+
+  const handleSwitchToLogin = () => {
+    setActiveModal("login");
   };
 
   return (
@@ -29,7 +38,7 @@ export default function RegisterModal({ isOpen, onClose, onRegister }) {
         onChange={(e) => setName(e.target.value)}
         required
       />
-      ```
+
       <input
         type="url"
         name="avatar"
@@ -38,6 +47,7 @@ export default function RegisterModal({ isOpen, onClose, onRegister }) {
         value={avatar}
         onChange={(e) => setAvatar(e.target.value)}
       />
+
       <input
         type="email"
         name="email"
@@ -47,6 +57,7 @@ export default function RegisterModal({ isOpen, onClose, onRegister }) {
         onChange={(e) => setEmail(e.target.value)}
         required
       />
+
       <input
         type="password"
         name="password"
@@ -56,6 +67,14 @@ export default function RegisterModal({ isOpen, onClose, onRegister }) {
         onChange={(e) => setPassword(e.target.value)}
         required
       />
+
+      <button
+        type="button"
+        className="modal__switch-btn"
+        onClick={handleSwitchToLogin}
+      >
+        or Log In
+      </button>
     </ModalWithForm>
   );
 }

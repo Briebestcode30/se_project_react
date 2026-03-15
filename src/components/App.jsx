@@ -40,7 +40,6 @@ function App() {
     condition: "",
     isDay: false,
   });
-
   const [isWeatherDataLoaded, setIsWeatherDataLoaded] = useState(false);
   const [activeModal, setActiveModal] = useState("");
   const [selectedCard, setSelectedCard] = useState({});
@@ -49,10 +48,12 @@ function App() {
   const [currentUser, setCurrentUser] = useState(null);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
+  // Sync logged in state
   useEffect(() => {
     setIsLoggedIn(!!currentUser);
   }, [currentUser]);
 
+  // Weather toggle
   const handleToggleSwitchChange = () => {
     setCurrentTemperatureUnit((prev) => (prev === "F" ? "C" : "F"));
   };
@@ -62,15 +63,14 @@ function App() {
     setActiveModal("preview");
   };
 
-  const handleAddClick = () => {
-    setActiveModal("add-garment");
-  };
+  const handleAddClick = () => setActiveModal("add-garment");
 
   const closeActiveModal = () => {
     setActiveModal("");
     setSelectedCard({});
   };
 
+  // Add item
   const onAddItem = (inputValues) => {
     const token = localStorage.getItem("jwt");
     if (!token) return console.error("Missing auth token");
@@ -89,6 +89,7 @@ function App() {
       .catch(console.error);
   };
 
+  // Delete item
   const handleDeleteItem = (id) => {
     const token = localStorage.getItem("jwt");
     if (!token) return console.error("Missing auth token");
@@ -101,6 +102,7 @@ function App() {
       .catch(console.error);
   };
 
+  // Like/unlike item
   const handleCardLike = ({ id, isLiked }) => {
     const token = localStorage.getItem("jwt");
     if (!token) return;
@@ -122,6 +124,7 @@ function App() {
     setIsLoggedIn(false);
   };
 
+  // Close modals with Escape key
   useEffect(() => {
     const closeByEscape = (e) => {
       if (e.key === "Escape") closeActiveModal();
@@ -130,6 +133,7 @@ function App() {
     return () => document.removeEventListener("keydown", closeByEscape);
   }, []);
 
+  // Fetch weather and items on mount
   useEffect(() => {
     getWeather(coordinates, apiKey)
       .then((data) => {
@@ -143,43 +147,55 @@ function App() {
       .catch(console.error);
   }, []);
 
+  // Validate JWT on mount
   useEffect(() => {
     const token = localStorage.getItem("jwt");
     if (token) {
       checkToken(token)
-        .then((res) => {
-          if (res && res._id) setCurrentUser(res);
+        .then((user) => {
+          if (user && user._id) setCurrentUser(user);
           else localStorage.removeItem("jwt");
         })
-        .catch(console.error);
+        .catch((err) => {
+          console.error(err);
+          localStorage.removeItem("jwt");
+        });
     }
   }, []);
 
+  // Register → login → store JWT → set currentUser
   const handleRegister = ({ name, avatar, email, password }) => {
     register({ name, avatar, email, password })
       .then(() => login({ email, password }))
       .then((res) => {
         if (res.token) {
           localStorage.setItem("jwt", res.token);
-          setCurrentUser({ ...res, email });
+          // Get user info after login
+          checkToken(res.token)
+            .then((user) => setCurrentUser(user))
+            .catch(console.error);
           setActiveModal("");
         }
       })
       .catch(console.error);
   };
 
+  // Login → store JWT → get user info
   const handleLogin = ({ email, password }) => {
     login({ email, password })
       .then((res) => {
         if (res.token) {
           localStorage.setItem("jwt", res.token);
-          setCurrentUser({ ...res, email });
+          checkToken(res.token)
+            .then((user) => setCurrentUser(user))
+            .catch(console.error);
           setActiveModal("");
         }
       })
       .catch(console.error);
   };
 
+  // Update profile
   const handleUpdateProfile = ({ name, avatar }) => {
     const token = localStorage.getItem("jwt");
     if (!token) return console.error("Missing auth token");

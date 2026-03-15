@@ -6,9 +6,7 @@ export default function ItemCard({ item, onCardClick, onCardLike }) {
   const currentUser = useContext(CurrentUserContext);
 
   const handleCardClick = () => {
-    if (onCardClick) {
-      onCardClick(item);
-    }
+    if (onCardClick) onCardClick(item);
   };
 
   const isLiked =
@@ -21,19 +19,15 @@ export default function ItemCard({ item, onCardClick, onCardLike }) {
   const handleLike = () => {
     if (!currentUser || !onCardLike) return;
 
-    ```
-onCardLike({
-  id: item._id,
-  isLiked,
-});
-```;
+    onCardLike({
+      id: item._id,
+      isLiked,
+    });
   };
 
   return (
     <div className="card">
-      {" "}
       <h2 className="card__name">{item.name}</h2>
-      ```
       <img
         className="card__image"
         src={item.imageUrl}

@@ -13,15 +13,14 @@ function Main({
 }) {
   const { currentTemperatureUnit } = useContext(CurrentTemperatureUnitContext);
 
+  // Filter clothing items for the current weather type
   const weatherFilteredItems = clothingItems.filter(
     (item) => item.weather === weatherData.type,
   );
 
   return (
-    <main>
-      {" "}
+    <main className="main">
       <WeatherCard weatherData={weatherData} />
-      ```
       <section className="cards">
         <p className="cards__text">
           Today is {weatherData.temp[currentTemperatureUnit]} &deg;{" "}

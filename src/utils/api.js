@@ -1,74 +1,112 @@
-const baseUrl = "http://localhost:3001";
+export const baseUrl = "http://localhost:3001";
 
-const headers = {
+const defaultHeaders = {
   "Content-Type": "application/json",
 };
 
-export const handleServerResponse = (res) =>
-  res.ok ? res.json() : Promise.reject(`Error: ${res.status}`);
-
-export const getItems = () => {
-  return fetch(`${baseUrl}/items`, { headers }).then(handleServerResponse);
+// Helper to handle fetch responses
+const handleServerResponse = async (res) => {
+  if (res.ok) return res.json();
+  const text = await res.text();
+  throw new Error(`Error ${res.status}: ${text}`);
 };
 
-export const addItem = ({ name, imageUrl, weather }, token) => {
-  if (!token) return Promise.reject("Missing auth token");
+// Add optional token to headers
+const getHeaders = (token) => {
+  return token
+    ? { ...defaultHeaders, Authorization: `Bearer ${token}` }
+    : defaultHeaders;
+};
 
-  return fetch(`${baseUrl}/items`, {
+// -------------------- Items --------------------
+export const getItems = async (token) => {
+  const res = await fetch(`${baseUrl}/items`, { headers: getHeaders(token) });
+  return handleServerResponse(res);
+};
+
+export const addItem = async ({ name, imageUrl, weather }, token) => {
+  if (!token) throw new Error("Missing auth token");
+
+  const res = await fetch(`${baseUrl}/items`, {
     method: "POST",
-    headers: {
-      ...headers,
-      Authorization: `Bearer ${token}`,
-    },
+    headers: getHeaders(token),
     body: JSON.stringify({ name, imageUrl, weather }),
-  }).then(handleServerResponse);
+  });
+
+  return handleServerResponse(res);
 };
 
-export const removeItem = (itemId, token) => {
-  if (!token) return Promise.reject("Missing auth token");
+export const removeItem = async (itemId, token) => {
+  if (!token) throw new Error("Missing auth token");
 
-  return fetch(`${baseUrl}/items/${itemId}`, {
+  const res = await fetch(`${baseUrl}/items/${itemId}`, {
     method: "DELETE",
-    headers: {
-      ...headers,
-      Authorization: `Bearer ${token}`,
-    },
-  }).then(handleServerResponse);
+    headers: getHeaders(token),
+  });
+
+  return handleServerResponse(res);
 };
 
-export const addCardLike = (id, token) => {
-  if (!token) return Promise.reject("Missing auth token");
+export const addCardLike = async (id, token) => {
+  if (!token) throw new Error("Missing auth token");
 
-  return fetch(`${baseUrl}/items/${id}/likes`, {
+  const res = await fetch(`${baseUrl}/items/${id}/likes`, {
     method: "PUT",
-    headers: {
-      ...headers,
-      Authorization: `Bearer ${token}`,
-    },
-  }).then(handleServerResponse);
+    headers: getHeaders(token),
+  });
+
+  return handleServerResponse(res);
 };
 
-export const removeCardLike = (id, token) => {
-  if (!token) return Promise.reject("Missing auth token");
+export const removeCardLike = async (id, token) => {
+  if (!token) throw new Error("Missing auth token");
 
-  return fetch(`${baseUrl}/items/${id}/likes`, {
+  const res = await fetch(`${baseUrl}/items/${id}/likes`, {
     method: "DELETE",
-    headers: {
-      ...headers,
-      Authorization: `Bearer ${token}`,
-    },
-  }).then(handleServerResponse);
+    headers: getHeaders(token),
+  });
+
+  return handleServerResponse(res);
 };
 
-export const updateUser = ({ name, avatar }, token) => {
-  if (!token) return Promise.reject("Missing auth token");
+// -------------------- User --------------------
+export const updateUser = async ({ name, avatar }, token) => {
+  if (!token) throw new Error("Missing auth token");
 
-  return fetch(`${baseUrl}/users/me`, {
+  const res = await fetch(`${baseUrl}/users/me`, {
     method: "PATCH",
-    headers: {
-      ...headers,
-      Authorization: `Bearer ${token}`,
-    },
+    headers: getHeaders(token),
     body: JSON.stringify({ name, avatar }),
-  }).then(handleServerResponse);
+  });
+
+  return handleServerResponse(res);
+};
+
+// -------------------- Auth --------------------
+export const register = async ({ name, avatar, email, password }) => {
+  const res = await fetch(`${baseUrl}/signup`, {
+    method: "POST",
+    headers: defaultHeaders,
+    body: JSON.stringify({ name, avatar, email, password }),
+  });
+  return handleServerResponse(res);
+};
+
+export const login = async ({ email, password }) => {
+  const res = await fetch(`${baseUrl}/signin`, {
+    method: "POST",
+    headers: defaultHeaders,
+    body: JSON.stringify({ email, password }),
+  });
+  return handleServerResponse(res);
+};
+
+export const checkToken = async (token) => {
+  if (!token) throw new Error("Missing auth token");
+
+  const res = await fetch(`${baseUrl}/users/me`, {
+    method: "GET",
+    headers: getHeaders(token),
+  });
+  return handleServerResponse(res);
 };

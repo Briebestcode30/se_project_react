@@ -11,16 +11,20 @@ export default function ClothesSection({
 }) {
   const currentUser = useContext(CurrentUserContext);
 
+  // Filter items that belong to the current user
   const userItems = clothingItems.filter(
     (item) => item.owner === currentUser?._id,
   );
 
   return (
-    <div className="Clothes-Section">
+    <div className="clothes-section">
       <div className="clothes-section__row">
         <p className="clothes-section__text">Your items</p>
-
-        <button className="clothes-section__button" onClick={onAddClick}>
+        <button
+          type="button"
+          className="clothes-section__button"
+          onClick={onAddClick}
+        >
           + Add new
         </button>
       </div>
