@@ -16,7 +16,11 @@ export default function LoginModal({
   };
 
   const handleSwitchToRegister = () => {
-    setActiveModal("register");
+    if (setActiveModal) {
+      setActiveModal("register");
+    } else {
+      console.error("setActiveModal function not provided");
+    }
   };
 
   return (

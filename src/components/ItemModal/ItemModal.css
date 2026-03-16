@@ -50,3 +50,21 @@
 .modal__content_type_image {
   overflow: hidden;
 }
+
+.modal__switch-btn {
+  align-items: center;
+  border: none;
+  color: rgba(0, 0, 0, 0.5);
+  width: 90px;
+  display: flex;
+  gap: 12px;
+  height: 20px;
+  justify-content: center;
+  position: relative;
+  top: 30px;
+  left: 170px;
+  background: none;
+  font-weight: 700;
+  font-family: Cabinet Grotesk;
+  font-size: 16px;
+}

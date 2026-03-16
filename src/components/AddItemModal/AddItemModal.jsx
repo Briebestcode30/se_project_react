@@ -19,6 +19,12 @@ const AddItemModal = ({ isOpen, onAddItem, onClose }) => {
 
   function handleSubmit(evt) {
     evt.preventDefault();
+
+    if (!values.name || !values.imageUrl || !values.weatherType) {
+      alert("Please fill in all fields.");
+      return;
+    }
+
     onAddItem(values);
   }
 
