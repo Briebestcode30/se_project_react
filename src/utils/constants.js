@@ -1,15 +1,13 @@
-// src/utils/constants.js
 
-// Weather icon options mapped to OpenWeather API conditions
 export const weatherOptions = [
   {
     day: true,
-    condition: "clear", // OpenWeather: "Clear"
+    condition: "clear",
     url: new URL("../assets/day/clear.svg", import.meta.url).href,
   },
   {
     day: true,
-    condition: "clouds", // OpenWeather: "Clouds"
+    condition: "clouds",
     url: new URL("../assets/day/cloudy.svg", import.meta.url).href,
   },
   {
@@ -24,7 +22,6 @@ export const weatherOptions = [
   },
 ];
 
-// Default icons if condition is missing or unmatched
 export const defaultWeatherOptions = {
   day: {
     url: new URL("../assets/day/default.svg", import.meta.url).href,
@@ -34,7 +31,6 @@ export const defaultWeatherOptions = {
   },
 };
 
-// ✅ Default clothing items (camelCase)
 export const defaultClothingItems = [
   {
     _id: 1,

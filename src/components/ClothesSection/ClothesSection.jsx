@@ -11,7 +11,6 @@ export default function ClothesSection({
 }) {
   const currentUser = useContext(CurrentUserContext);
 
-  // Filter items that belong to the current user
   const userItems = clothingItems.filter(
     (item) => item.owner === currentUser?._id,
   );

@@ -77,7 +77,6 @@ function App() {
     setSelectedCard({});
   };
 
-  // ADD ITEM
   const onAddItem = (inputValues) => {
     const token = localStorage.getItem("jwt");
 
@@ -100,7 +99,6 @@ function App() {
       .catch((err) => console.error("Add item error:", err));
   };
 
-  // DELETE ITEM
   const handleDeleteItem = (id) => {
     const token = localStorage.getItem("jwt");
     if (!token) return console.error("Missing auth token");
@@ -113,7 +111,6 @@ function App() {
       .finally(() => closeActiveModal());
   };
 
-  // LIKE ITEM
   const handleCardLike = ({ id, isLiked }) => {
     const token = localStorage.getItem("jwt");
     if (!token) return;
@@ -129,14 +126,12 @@ function App() {
       .catch((err) => console.error("Like error:", err));
   };
 
-  // SIGN OUT
   const handleSignOut = () => {
     localStorage.removeItem("jwt");
     setCurrentUser(null);
     setIsLoggedIn(false);
   };
 
-  // ESC KEY CLOSE MODAL
   useEffect(() => {
     const closeByEscape = (e) => {
       if (e.key === "Escape") closeActiveModal();
@@ -149,7 +144,6 @@ function App() {
     };
   }, []);
 
-  // WEATHER + ITEMS
   useEffect(() => {
     getWeather(coordinates, apiKey)
       .then((data) => {
@@ -167,7 +161,6 @@ function App() {
     }
   }, []);
 
-  // CHECK TOKEN
   useEffect(() => {
     const token = localStorage.getItem("jwt");
 
@@ -187,7 +180,6 @@ function App() {
       });
   }, []);
 
-  // REGISTER
   const handleRegister = ({ name, avatar, email, password }) => {
     console.log("Registering user...");
 
@@ -213,7 +205,6 @@ function App() {
       .catch((err) => console.error("Register/Login error:", err));
   };
 
-  // LOGIN
   const handleLogin = ({ email, password }) => {
     login({ email, password })
       .then((res) => {
@@ -232,7 +223,6 @@ function App() {
       .catch((err) => console.error("Login error:", err));
   };
 
-  // UPDATE PROFILE
   const handleUpdateProfile = ({ name, avatar }) => {
     const token = localStorage.getItem("jwt");
     if (!token) return console.error("Missing auth token");

@@ -1,7 +1,5 @@
-// src/utils/auth.js
 import { baseUrl } from "./api";
 
-// Helper to handle fetch responses
 const handleServerResponse = async (res) => {
   if (res.ok) return res.json();
   const text = await res.text();

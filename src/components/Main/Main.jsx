@@ -13,7 +13,6 @@ function Main({
 }) {
   const { currentTemperatureUnit } = useContext(CurrentTemperatureUnitContext);
 
-  // Filter clothing items for the current weather type
   const weatherFilteredItems = clothingItems.filter(
     (item) => item.weather === weatherData.type,
   );
