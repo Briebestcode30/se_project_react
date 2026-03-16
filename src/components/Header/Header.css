@@ -64,7 +64,7 @@
 }
 
 .header__register-btn {
-  width: 52px;
+  width: 100px;
   position: relative;
   top: 8px;
   border: none;
@@ -76,7 +76,7 @@
 }
 
 .header__login-btn {
-  width: 52px;
+  width: 100px;
   position: relative;
   left: 715px;
   top: 8px;

@@ -12,6 +12,7 @@ import {
   removeCardLike,
   updateUser,
 } from "../utils/api";
+
 import { register, login, checkToken } from "../utils/auth";
 
 import Header from "./Header/Header";
@@ -45,14 +46,18 @@ function App() {
   const [activeModal, setActiveModal] = useState("");
   const [selectedCard, setSelectedCard] = useState({});
   const [currentTemperatureUnit, setCurrentTemperatureUnit] = useState("F");
+
   const [clothingItems, setClothingItems] = useState([]);
   const [currentUser, setCurrentUser] = useState(null);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
-  useEffect(() => setIsLoggedIn(!!currentUser), [currentUser]);
+  useEffect(() => {
+    setIsLoggedIn(!!currentUser);
+  }, [currentUser]);
 
-  const handleToggleSwitchChange = () =>
+  const handleToggleSwitchChange = () => {
     setCurrentTemperatureUnit((prev) => (prev === "F" ? "C" : "F"));
+  };
 
   const handleCardClick = (card) => {
     setSelectedCard(card);
@@ -72,8 +77,10 @@ function App() {
     setSelectedCard({});
   };
 
+  // ADD ITEM
   const onAddItem = (inputValues) => {
     const token = localStorage.getItem("jwt");
+
     if (!token) {
       setActiveModal("login");
       return;
@@ -90,9 +97,10 @@ function App() {
         setClothingItems((prev) => [data, ...prev]);
         closeActiveModal();
       })
-      .catch(console.error);
+      .catch((err) => console.error("Add item error:", err));
   };
 
+  // DELETE ITEM
   const handleDeleteItem = (id) => {
     const token = localStorage.getItem("jwt");
     if (!token) return console.error("Missing auth token");
@@ -101,99 +109,130 @@ function App() {
       .then(() => {
         setClothingItems((prev) => prev.filter((item) => item._id !== id));
       })
-      .catch(console.error)
+      .catch((err) => console.error("Delete item error:", err))
       .finally(() => closeActiveModal());
   };
 
+  // LIKE ITEM
   const handleCardLike = ({ id, isLiked }) => {
     const token = localStorage.getItem("jwt");
     if (!token) return;
 
     const apiCall = !isLiked ? addCardLike : removeCardLike;
+
     apiCall(id, token)
       .then((updatedCard) => {
         setClothingItems((cards) =>
           cards.map((item) => (item._id === id ? updatedCard : item)),
         );
       })
-      .catch(console.error);
+      .catch((err) => console.error("Like error:", err));
   };
 
+  // SIGN OUT
   const handleSignOut = () => {
     localStorage.removeItem("jwt");
     setCurrentUser(null);
     setIsLoggedIn(false);
   };
 
+  // ESC KEY CLOSE MODAL
   useEffect(() => {
-    const closeByEscape = (e) => e.key === "Escape" && closeActiveModal();
+    const closeByEscape = (e) => {
+      if (e.key === "Escape") closeActiveModal();
+    };
+
     document.addEventListener("keydown", closeByEscape);
-    return () => document.removeEventListener("keydown", closeByEscape);
+
+    return () => {
+      document.removeEventListener("keydown", closeByEscape);
+    };
   }, []);
 
-  // Fetch weather + items
+  // WEATHER + ITEMS
   useEffect(() => {
     getWeather(coordinates, apiKey)
       .then((data) => {
         setWeatherData(filterWeatherData(data));
         setIsWeatherDataLoaded(true);
       })
-      .catch(console.error);
+      .catch((err) => console.error("Weather error:", err));
 
     const token = localStorage.getItem("jwt");
+
     if (token) {
       getItems(token)
         .then((data) => setClothingItems(data.reverse()))
-        .catch(console.error);
+        .catch((err) => console.error("Items error:", err));
     }
   }, []);
 
-  // Validate stored JWT
+  // CHECK TOKEN
   useEffect(() => {
     const token = localStorage.getItem("jwt");
-    if (token) {
-      checkToken(token)
-        .then((user) =>
-          user && user._id
-            ? setCurrentUser(user)
-            : localStorage.removeItem("jwt"),
-        )
-        .catch((err) => {
-          console.error(err);
+
+    if (!token) return;
+
+    checkToken(token)
+      .then((user) => {
+        if (user && user._id) {
+          setCurrentUser(user);
+        } else {
           localStorage.removeItem("jwt");
-        });
-    }
+        }
+      })
+      .catch((err) => {
+        console.error("Token error:", err);
+        localStorage.removeItem("jwt");
+      });
   }, []);
 
+  // REGISTER
   const handleRegister = ({ name, avatar, email, password }) => {
+    console.log("Registering user...");
+
     register({ name, avatar, email, password })
-      .then(() => login({ email, password }))
+      .then((data) => {
+        console.log("Register success:", data);
+        return login({ email, password });
+      })
       .then((res) => {
+        console.log("Login success:", res);
+
         if (res.token) {
           localStorage.setItem("jwt", res.token);
-          checkToken(res.token)
-            .then((user) => setCurrentUser(user))
-            .catch(console.error);
+          return checkToken(res.token);
+        }
+      })
+      .then((user) => {
+        if (user) {
+          setCurrentUser(user);
           setActiveModal("");
         }
       })
-      .catch(console.error);
+      .catch((err) => console.error("Register/Login error:", err));
   };
 
+  // LOGIN
   const handleLogin = ({ email, password }) => {
     login({ email, password })
       .then((res) => {
         if (res.token) {
           localStorage.setItem("jwt", res.token);
-          checkToken(res.token)
-            .then((user) => setCurrentUser(user))
-            .catch(console.error);
+
+          return checkToken(res.token);
+        }
+      })
+      .then((user) => {
+        if (user) {
+          setCurrentUser(user);
           setActiveModal("");
         }
       })
-      .catch(console.error);
+      .catch((err) => console.error("Login error:", err));
   };
 
+  // UPDATE PROFILE
   const handleUpdateProfile = ({ name, avatar }) => {
     const token = localStorage.getItem("jwt");
     if (!token) return console.error("Missing auth token");
@@ -203,7 +242,7 @@ function App() {
         setCurrentUser(updatedUser);
         setActiveModal("");
       })
-      .catch(console.error);
+      .catch((err) => console.error("Update profile error:", err));
   };
 
   if (!isWeatherDataLoaded) return <p>LOADING...</p>;
@@ -235,6 +274,7 @@ function App() {
                   />
                 }
               />
+
               <Route
                 path="/profile"
                 element={
@@ -272,14 +312,14 @@ function App() {
             isOpen={activeModal === "register"}
             onClose={closeActiveModal}
             onRegister={handleRegister}
-            setActiveModal={setActiveModal} // <-- fix
+            setActiveModal={setActiveModal}
           />
 
           <LoginModal
             isOpen={activeModal === "login"}
             onClose={closeActiveModal}
             onLogin={handleLogin}
-            setActiveModal={setActiveModal} // <-- fix
+            setActiveModal={setActiveModal}
           />
 
           <EditProfileModal

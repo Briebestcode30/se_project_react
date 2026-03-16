@@ -14,7 +14,15 @@ export default function RegisterModal({
 
   const handleSubmit = (e) => {
     e.preventDefault();
+
+    console.log("Register submitted:", { name, avatar, email, password });
+
     onRegister({ name, avatar, email, password });
+
+    setName("");
+    setAvatar("");
+    setEmail("");
+    setPassword("");
   };
 
   const handleSwitchToLogin = () => {
