@@ -1,4 +1,4 @@
-import { baseUrl } from "./api";
+const baseUrl = "http://localhost:3001";
 
 const handleServerResponse = async (res) => {
   if (res.ok) return res.json();
