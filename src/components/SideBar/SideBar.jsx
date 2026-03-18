@@ -17,23 +17,7 @@ export default function SideBar({ onEditProfile, onSignOut }) {
         <img src={avatar} alt={username} className="sidebar__avatar" />{" "}
         <p className="sidebar__username">{username}</p>{" "}
       </div>
-      <div className="sidebar__actions">
-        <button
-          className="sidebar__edit-btn"
-          type="button"
-          onClick={onEditProfile}
-        >
-          Change profile data
-        </button>
-
-        <button
-          className="sidebar__signout-btn"
-          type="button"
-          onClick={onSignOut}
-        >
-          Sign out
-        </button>
-      </div>
+      <div className="sidebar__actions"></div>
     </aside>
   );
 }

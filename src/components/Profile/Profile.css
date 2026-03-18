@@ -2,3 +2,22 @@
   display: flex;
   justify-content: space-between;
 }
+
+.Profile__edit-btn {
+  gap: 12px;
+  position: relative;
+  display: flex;
+  width: 96px;
+  border: none;
+  top: -8px;
+  left: -8px;
+}
+.Profile__signout-btn {
+  gap: 12px;
+  position: relative;
+  display: flex;
+  width: 96px;
+  border: none;
+  top: 9px;
+  left: -8px;
+}

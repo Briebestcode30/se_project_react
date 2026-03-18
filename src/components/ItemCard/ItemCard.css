@@ -12,11 +12,10 @@
   font-weight: 700;
   line-height: 20px;
   color: rgba(0, 0, 0, 0.6);
-  background-color: white;
-  border-radius: 16px;
   box-sizing: border-box;
-  border: 1.5px solid #e6e6e6;
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+  color: white;
+  border: none;
 }
 
 .card__image {
@@ -26,4 +25,12 @@
   box-sizing: border-box;
   height: 323px;
   object-fit: cover;
+}
+
+.card__like-btn {
+  border: none;
+  position: relative;
+  left: -40px;
+  top: 138px;
+  background: none;
 }

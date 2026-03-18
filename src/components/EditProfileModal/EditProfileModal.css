@@ -1,0 +1,12 @@
+.modal__submit-btn {
+  border: none;
+  background: black;
+  color: white;
+  font-weight: 700;
+  font-family: cabinet grotesk;
+  position: relative;
+  left: 10px;
+  top: 5px;
+  width: 96px;
+  border-radius: 4px;
+}

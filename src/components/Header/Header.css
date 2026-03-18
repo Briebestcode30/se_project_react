@@ -86,3 +86,14 @@
   font-size: 20px;
   color: rgba(0, 0, 0, 1);
 }
+
+.header__avatar {
+  max-width: 25px;
+  left: -5px;
+  position: relative;
+  display: flex;
+  gap: 12px;
+  border-radius: 16px;
+  box-sizing: border-box;
+  object-fit: cover;
+}
