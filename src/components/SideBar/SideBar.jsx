@@ -12,11 +12,7 @@ export default function SideBar({ onEditProfile, onSignOut }) {
   return (
     <aside className="sidebar">
       {" "}
-      <div className="sidebar__user-container">
-        {" "}
-        <img src={avatar} alt={username} className="sidebar__avatar" />{" "}
-        <p className="sidebar__username">{username}</p>{" "}
-      </div>
+      <div className="sidebar__user-container"> </div>
       <div className="sidebar__actions"></div>
     </aside>
   );
