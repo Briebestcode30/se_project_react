@@ -25,6 +25,7 @@
   left: -30px;
   font-family: cabinet grotesk;
   color: rgba(0, 0, 0, 1);
+  width: 96px;
 }
 
 .sidebar__signout-btn {
