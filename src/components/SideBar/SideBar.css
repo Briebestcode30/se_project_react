@@ -1,12 +1,10 @@
 .sidebar__avatar {
-  display: flex;
-  flex-direction: row-reverse;
-  align-items: center;
-  position: relative;
-  height: 56px;
-  top: -53px;
+  width: 56px;
+  top: 56px;
   left: -85px;
-  gap: 16px;
+  position: relative;
+  border-radius: 57px;
+  height: 56px;
 }
 
 .sidebar__username {
@@ -17,4 +15,24 @@
   position: relative;
   top: -5px;
   left: -25px;
+}
+
+.sidebar__edit-btn {
+  border: none;
+  position: relative;
+  top: -20px;
+  font-weight: 700;
+  left: -30px;
+  font-family: cabinet grotesk;
+  color: rgba(0, 0, 0, 1);
+}
+
+.sidebar__signout-btn {
+  border: none;
+  position: relative;
+  top: -20px;
+  font-weight: 700;
+  left: -30px;
+  font-family: cabinet grotesk;
+  color: rgba(0, 0, 0, 1);
 }

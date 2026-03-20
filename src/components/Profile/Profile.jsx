@@ -12,20 +12,11 @@ export default function Profile({
 }) {
   return (
     <section className="Profile">
-      {" "}
-      <SideBar />
-      <div className="Profile__buttons">
-        <button
-          className="Profile__edit-btn"
-          onClick={() => setActiveModal("edit-profile")}
-        >
-          Edit profile
-        </button>
+      <SideBar
+        onEditProfile={() => setActiveModal("edit-profile")}
+        onSignOut={onSignOut}
+      />
 
-        <button className="Profile__signout-btn" onClick={onSignOut}>
-          Sign out
-        </button>
-      </div>
       <ClothesSection
         clothingItems={clothingItems}
         onCardClick={onCardClick}

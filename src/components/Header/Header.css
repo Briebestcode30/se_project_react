@@ -88,12 +88,9 @@
 }
 
 .header__avatar {
-  max-width: 35px;
-  left: -5px;
+  width: 56px;
+  left: -50px;
   position: relative;
-  display: flex;
-  gap: 12px;
-  border-radius: 16px;
-  box-sizing: border-box;
-  object-fit: cover;
+  border-radius: 57px;
+  height: 56px;
 }
