@@ -4,13 +4,7 @@ import ClothesSection from "../ClothesSection/ClothesSection";
 import { useContext } from "react";
 import CurrentTemperatureUnitContext from "../../contexts/CurrentTemperatureUnitContext";
 
-function Main({
-  weatherData,
-  handleCardClick,
-  clothingItems,
-  onAddClick,
-  onCardLike,
-}) {
+function Main({ weatherData, handleCardClick, clothingItems, onCardLike }) {
   const { currentTemperatureUnit } = useContext(CurrentTemperatureUnitContext);
 
   const weatherFilteredItems = clothingItems.filter(
@@ -20,6 +14,7 @@ function Main({
   return (
     <main className="main">
       <WeatherCard weatherData={weatherData} />
+
       <section className="cards">
         <p className="cards__text">
           Today is {weatherData.temp[currentTemperatureUnit]} &deg;{" "}
@@ -29,8 +24,8 @@ function Main({
         <ClothesSection
           clothingItems={weatherFilteredItems}
           onCardClick={handleCardClick}
-          onAddClick={onAddClick}
           onCardLike={onCardLike}
+          onAddClick={null}
         />
       </section>
     </main>

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import ModalWithForm from "../ModalWithForm/ModalWithForm";
 
 export default function LoginModal({
@@ -10,17 +10,20 @@ export default function LoginModal({
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
+  useEffect(() => {
+    if (isOpen) {
+      setEmail("");
+      setPassword("");
+    }
+  }, [isOpen]);
+
   const handleSubmit = (e) => {
     e.preventDefault();
     onLogin({ email, password });
   };
 
   const handleSwitchToRegister = () => {
-    if (setActiveModal) {
-      setActiveModal("register");
-    } else {
-      console.error("setActiveModal function not provided");
-    }
+    setActiveModal("register");
   };
 
   return (

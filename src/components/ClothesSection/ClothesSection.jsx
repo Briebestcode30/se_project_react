@@ -19,13 +19,17 @@ export default function ClothesSection({
     <div className="clothes-section">
       <div className="clothes-section__row">
         <p className="clothes-section__text">Your items</p>
-        <button
-          type="button"
-          className="clothes-section__button"
-          onClick={onAddClick}
-        >
-          + Add new
-        </button>
+
+        {/* Only show Add button if onAddClick is passed */}
+        {onAddClick && (
+          <button
+            type="button"
+            className="clothes-section__button"
+            onClick={onAddClick}
+          >
+            + Add new
+          </button>
+        )}
       </div>
 
       <ul className="clothes-section__items">

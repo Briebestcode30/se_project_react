@@ -15,61 +15,67 @@ function Header({ handleAddClick, weatherData, setActiveModal, isLoggedIn }) {
 
   return (
     <header className="header">
-      <NavLink to="/" className="header__logo-link">
-        <img src={logo} alt="WTWR logo" className="header__logo" />
-      </NavLink>
+      {/* LEFT SIDE */}
+      <div className="header__left">
+        <NavLink to="/" className="header__logo-link">
+          <img src={logo} alt="WTWR logo" className="header__logo" />
+        </NavLink>
 
-      <p className="header__date-and-location">
-        {currentDate}, {weatherData.city}
-      </p>
+        <p className="header__date-and-location">
+          {currentDate}, {weatherData.city}
+        </p>
+      </div>
 
-      <ToggleSwitch />
+      {/* RIGHT SIDE */}
+      <div className="header__right">
+        <ToggleSwitch />
 
-      {isLoggedIn ? (
-        <>
-          <button
-            type="button"
-            className="header__add-clothes-btn"
-            onClick={handleAddClick}
-          >
-            + Add Clothes
-          </button>
+        {isLoggedIn ? (
+          <>
+            <button
+              type="button"
+              className="header__add-clothes-btn"
+              onClick={handleAddClick}
+            >
+              + Add Clothes
+            </button>
 
-          <NavLink to="/profile" className="header__nav-link">
-            <div className="header__user-container">
-              <p className="header__username">{currentUser?.name}</p>
+            <NavLink to="/profile" className="header__nav-link">
+              <div className="header__user-container">
+                <p className="header__username">{currentUser?.name}</p>
 
-              {currentUser?.avatar ? (
-                <img
-                  src={currentUser.avatar}
-                  alt={currentUser.name}
-                  className="header__avatar"
-                />
-              ) : (
-                <div className="header__avatar-placeholder">
-                  {currentUser?.name?.[0]?.toUpperCase()}
-                </div>
-              )}
-            </div>
-          </NavLink>
-        </>
-      ) : (
-        <div className="header__auth-buttons">
-          <button
-            className="header__register-btn"
-            onClick={() => setActiveModal("register")}
-          >
-            Sign Up
-          </button>
+                {currentUser?.avatar ? (
+                  <img
+                    src={currentUser.avatar}
+                    alt={currentUser.name}
+                    className="header__avatar"
+                  />
+                ) : (
+                  <div className="header__avatar-placeholder">
+                    {currentUser?.name?.[0]?.toUpperCase()}
+                  </div>
+                )}
+              </div>
+            </NavLink>
+          </>
+        ) : (
+          <div className="header__auth-buttons">
+            <button
+              className="header__register-btn"
+              onClick={() => setActiveModal("register")}
+            >
+              Sign Up
+            </button>
 
-          <button
-            className="header__login-btn"
-            onClick={() => setActiveModal("login")}
-          >
-            Log In
-          </button>
-        </div>
-      )}
+            <button
+              className="header__login-btn"
+              onClick={() => setActiveModal("login")}
+            >
+              Log In
+            </button>
+          </div>
+        )}
+      </div>
     </header>
   );
 }

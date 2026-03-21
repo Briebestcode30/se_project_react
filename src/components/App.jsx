@@ -79,7 +79,6 @@ function App() {
 
   const onAddItem = (inputValues) => {
     const token = localStorage.getItem("jwt");
-
     if (!token) {
       setActiveModal("login");
       return;
@@ -111,16 +110,16 @@ function App() {
       .finally(() => closeActiveModal());
   };
 
-  const handleCardLike = ({ id, isLiked }) => {
+  const handleCardLike = (item, like) => {
     const token = localStorage.getItem("jwt");
     if (!token) return;
 
-    const apiCall = !isLiked ? addCardLike : removeCardLike;
+    const apiCall = like ? addCardLike : removeCardLike;
 
-    apiCall(id, token)
+    apiCall(item._id, token)
       .then((updatedCard) => {
         setClothingItems((cards) =>
-          cards.map((item) => (item._id === id ? updatedCard : item)),
+          cards.map((c) => (c._id === item._id ? updatedCard : c)),
         );
       })
       .catch((err) => console.error("Like error:", err));
@@ -163,16 +162,12 @@ function App() {
 
   useEffect(() => {
     const token = localStorage.getItem("jwt");
-
     if (!token) return;
 
     checkToken(token)
       .then((user) => {
-        if (user && user._id) {
-          setCurrentUser(user);
-        } else {
-          localStorage.removeItem("jwt");
-        }
+        if (user && user._id) setCurrentUser(user);
+        else localStorage.removeItem("jwt");
       })
       .catch((err) => {
         console.error("Token error:", err);
@@ -181,16 +176,9 @@ function App() {
   }, []);
 
   const handleRegister = ({ name, avatar, email, password }) => {
-    console.log("Registering user...");
-
     register({ name, avatar, email, password })
-      .then((data) => {
-        console.log("Register success:", data);
-        return login({ email, password });
-      })
+      .then(() => login({ email, password }))
       .then((res) => {
-        console.log("Login success:", res);
-
         if (res.token) {
           localStorage.setItem("jwt", res.token);
           return checkToken(res.token);
@@ -210,7 +198,6 @@ function App() {
       .then((res) => {
         if (res.token) {
           localStorage.setItem("jwt", res.token);
-
           return checkToken(res.token);
         }
       })

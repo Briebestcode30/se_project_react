@@ -1,43 +1,48 @@
 .header {
   display: flex;
   align-items: center;
-  padding: 32px 0 28px;
+  justify-content: space-between; /* Spread left and right content */
+  padding: 32px 40px; /* Add horizontal padding for some breathing space */
 }
 
-.header__logo {
-  margin-right: 24px;
+.header__left {
+  display: flex;
+  align-items: center;
+  gap: 24px; /* space between logo and date/location */
 }
 
 .header__logo-link {
   display: inline-block;
-  text-decoration: none;
+}
+
+.header__logo {
+  /* margin-right removed, gap handles spacing */
 }
 
 .header__date-and-location {
   margin: 0;
-  width: 160px;
-  height: 24px;
-  position: relative;
-  top: 8px;
-  left: 20px;
-  line-height: 24px;
   color: rgba(0, 0, 0, 1);
-  font-family: Cabinet Grotesk;
+  font-family: "Cabinet Grotesk", sans-serif;
   font-weight: 700;
+  font-size: 16px; /* Adjust for readability */
+  line-height: 1.5;
+}
+
+.header__right {
+  display: flex;
+  align-items: center;
+  gap: 20px; /* space between elements on right */
 }
 
 .header__add-clothes-btn {
-  margin: 0 20px 0 auto;
   cursor: pointer;
-  position: relative;
-  top: 3px;
-  left: 34px;
-  list-style-type: none;
-  border-style: none;
-  height: 24px;
+  border: none;
+  background: none;
   font-weight: 700;
-  font-family: Cabinet Grotesk;
+  font-family: "Cabinet Grotesk", sans-serif;
+  font-size: 16px;
   color: rgba(0, 0, 0, 1);
+  padding: 0;
 }
 
 .header__user-container {
@@ -49,48 +54,55 @@
 .header__username {
   margin: 0;
   font-weight: 700;
-  font-family: Cabinet Grotesk;
-  width: 157px;
-  height: 25px;
-  line-height: 100%;
-  position: relative;
-  top: 8px;
-  left: 45px;
+  font-family: "Cabinet Grotesk", sans-serif;
+  font-size: 16px;
+  white-space: nowrap;
 }
 
 .header__nav-link {
   color: black;
   text-decoration: none;
-}
-
-.header__register-btn {
-  width: 100px;
-  position: relative;
-  top: 8px;
-  border: none;
-  font-family: Cabinet Grotesk;
-  font-weight: 700;
-  left: 715px;
-  font-size: 20px;
-  color: rgba(0, 0, 0, 1);
-}
-
-.header__login-btn {
-  width: 100px;
-  position: relative;
-  left: 715px;
-  top: 8px;
-  border: none;
-  font-family: Cabinet Grotesk;
-  font-weight: 700;
-  font-size: 20px;
-  color: rgba(0, 0, 0, 1);
+  display: flex;
+  align-items: center;
 }
 
 .header__avatar {
   width: 56px;
-  left: -50px;
-  position: relative;
-  border-radius: 57px;
   height: 56px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.header__avatar-placeholder {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background-color: #ccc;
+  color: #000;
+  font-weight: 700;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: "Cabinet Grotesk", sans-serif;
+  font-size: 20px;
+  user-select: none;
+}
+
+/* Buttons for login/register aligned to right */
+.header__auth-buttons {
+  display: flex;
+  gap: 12px;
+}
+
+.header__register-btn,
+.header__login-btn {
+  border: none;
+  background: none;
+  font-family: "Cabinet Grotesk", sans-serif;
+  font-weight: 700;
+  font-size: 16px;
+  color: rgba(0, 0, 0, 1);
+  cursor: pointer;
+  padding: 0;
+  white-space: nowrap;
 }
