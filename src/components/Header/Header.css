@@ -1,22 +1,18 @@
 .header {
   display: flex;
   align-items: center;
-  justify-content: space-between; /* Spread left and right content */
-  padding: 32px 40px; /* Add horizontal padding for some breathing space */
+  justify-content: space-between;
+  padding: 32px 40px;
 }
 
 .header__left {
   display: flex;
   align-items: center;
-  gap: 24px; /* space between logo and date/location */
+  gap: 24px;
 }
 
 .header__logo-link {
   display: inline-block;
-}
-
-.header__logo {
-  /* margin-right removed, gap handles spacing */
 }
 
 .header__date-and-location {
@@ -24,14 +20,14 @@
   color: rgba(0, 0, 0, 1);
   font-family: "Cabinet Grotesk", sans-serif;
   font-weight: 700;
-  font-size: 16px; /* Adjust for readability */
+  font-size: 16px;
   line-height: 1.5;
 }
 
 .header__right {
   display: flex;
   align-items: center;
-  gap: 20px; /* space between elements on right */
+  gap: 20px;
 }
 
 .header__add-clothes-btn {
@@ -88,21 +84,21 @@
   user-select: none;
 }
 
-/* Buttons for login/register aligned to right */
 .header__auth-buttons {
   display: flex;
   gap: 12px;
 }
 
-.header__register-btn,
+.header__register-btn {
+  border: none;
+  font-family: cabinet grotesk;
+  font-weight: 700;
+  color: rgba(0, 0, 0, 1);
+}
+
 .header__login-btn {
   border: none;
-  background: none;
-  font-family: "Cabinet Grotesk", sans-serif;
+  font-family: cabinet grotesk;
   font-weight: 700;
-  font-size: 16px;
   color: rgba(0, 0, 0, 1);
-  cursor: pointer;
-  padding: 0;
-  white-space: nowrap;
 }

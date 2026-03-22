@@ -1,3 +1,7 @@
+.sidebar {
+  position: relative;
+}
+
 .sidebar__avatar {
   width: 56px;
   top: 56px;

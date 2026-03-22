@@ -49,11 +49,8 @@ function App() {
 
   const [clothingItems, setClothingItems] = useState([]);
   const [currentUser, setCurrentUser] = useState(null);
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
 
-  useEffect(() => {
-    setIsLoggedIn(!!currentUser);
-  }, [currentUser]);
+  const isLoggedIn = !!currentUser;
 
   const handleToggleSwitchChange = () => {
     setCurrentTemperatureUnit((prev) => (prev === "F" ? "C" : "F"));
@@ -128,7 +125,6 @@ function App() {
   const handleSignOut = () => {
     localStorage.removeItem("jwt");
     setCurrentUser(null);
-    setIsLoggedIn(false);
   };
 
   useEffect(() => {
@@ -150,15 +146,18 @@ function App() {
         setIsWeatherDataLoaded(true);
       })
       .catch((err) => console.error("Weather error:", err));
+  }, []);
+
+  useEffect(() => {
+    if (!isLoggedIn) return;
 
     const token = localStorage.getItem("jwt");
+    if (!token) return;
 
-    if (token) {
-      getItems(token)
-        .then((data) => setClothingItems(data.reverse()))
-        .catch((err) => console.error("Items error:", err));
-    }
-  }, []);
+    getItems(token)
+      .then((data) => setClothingItems(data.reverse()))
+      .catch((err) => console.error("Items error:", err));
+  }, [isLoggedIn]);
 
   useEffect(() => {
     const token = localStorage.getItem("jwt");
@@ -187,7 +186,7 @@ function App() {
       .then((user) => {
         if (user) {
           setCurrentUser(user);
-          setActiveModal("");
+          closeActiveModal();
         }
       })
       .catch((err) => console.error("Register/Login error:", err));
@@ -204,7 +203,7 @@ function App() {
       .then((user) => {
         if (user) {
           setCurrentUser(user);
-          setActiveModal("");
+          closeActiveModal();
         }
       })
       .catch((err) => console.error("Login error:", err));
@@ -217,7 +216,7 @@ function App() {
     updateUser({ name, avatar }, token)
       .then((updatedUser) => {
         setCurrentUser(updatedUser);
-        setActiveModal("");
+        closeActiveModal();
       })
       .catch((err) => console.error("Update profile error:", err));
   };

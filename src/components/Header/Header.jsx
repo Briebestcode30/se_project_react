@@ -28,6 +28,7 @@ function Header({ handleAddClick, weatherData, setActiveModal, isLoggedIn }) {
 
       {/* RIGHT SIDE */}
       <div className="header__right">
+        {/* Temperature unit toggle */}
         <ToggleSwitch />
 
         {isLoggedIn ? (
@@ -60,14 +61,18 @@ function Header({ handleAddClick, weatherData, setActiveModal, isLoggedIn }) {
           </>
         ) : (
           <div className="header__auth-buttons">
+            {/* Sign Up button */}
             <button
+              type="button"
               className="header__register-btn"
               onClick={() => setActiveModal("register")}
             >
               Sign Up
             </button>
 
+            {/* Log In button */}
             <button
+              type="button"
               className="header__login-btn"
               onClick={() => setActiveModal("login")}
             >

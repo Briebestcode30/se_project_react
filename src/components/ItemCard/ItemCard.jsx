@@ -21,26 +21,30 @@ export default function ItemCard({ item, onCardClick, onCardLike }) {
 
   return (
     <div className="card">
-      <h2 className="card__name">{item.name}</h2>
+      <div className="card__header">
+        <h2 className="card__name">{item.name}</h2>
+
+        {currentUser && (
+          <button
+            type="button"
+            className="card__like-btn"
+            onClick={handleLike}
+            aria-label="Like item"
+          >
+            <img
+              src={isLiked ? likeButtonDark : likeButton}
+              alt={isLiked ? "Liked" : "Like"}
+            />
+          </button>
+        )}
+      </div>
+
       <img
         className="card__image"
         src={item.imageUrl}
         alt={item.name}
         onClick={handleCardClick}
       />
-      {currentUser && (
-        <button
-          type="button"
-          className="card__like-btn"
-          onClick={handleLike}
-          aria-label="Like item"
-        >
-          <img
-            src={isLiked ? likeButtonDark : likeButton}
-            alt={isLiked ? "Liked" : "Like"}
-          />
-        </button>
-      )}
     </div>
   );
 }

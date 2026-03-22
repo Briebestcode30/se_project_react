@@ -1,3 +1,4 @@
+import "./RegisterModal.css";
 import { useState, useEffect } from "react";
 import ModalWithForm from "../ModalWithForm/ModalWithForm";
 
@@ -23,7 +24,6 @@ export default function RegisterModal({
 
   const handleSubmit = (e) => {
     e.preventDefault();
-
     onRegister({ name, avatar, email, password });
   };
 
@@ -33,50 +33,63 @@ export default function RegisterModal({
 
   return (
     <ModalWithForm
-      title="Register"
-      buttonText="Register"
+      title="Sign Up"
+      buttonText="Sign Up"
       isOpen={isOpen}
       onClose={onClose}
       onSubmit={handleSubmit}
     >
-      <input
-        type="text"
-        name="name"
-        className="modal__input"
-        placeholder="Name"
-        value={name}
-        onChange={(e) => setName(e.target.value)}
-        required
-      />
+      <label className="modal__label">
+        Email*
+        <input
+          type="email"
+          name="email"
+          className="modal__input"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+          placeholder="Email"
+          required
+        />
+      </label>
 
-      <input
-        type="url"
-        name="avatar"
-        className="modal__input"
-        placeholder="Avatar URL"
-        value={avatar}
-        onChange={(e) => setAvatar(e.target.value)}
-      />
+      <label className="modal__label">
+        Password*
+        <input
+          type="password"
+          name="password"
+          className="modal__input"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+          placeholder="Password"
+          required
+        />
+      </label>
 
-      <input
-        type="email"
-        name="email"
-        className="modal__input"
-        placeholder="Email"
-        value={email}
-        onChange={(e) => setEmail(e.target.value)}
-        required
-      />
+      <label className="modal__label">
+        Name*
+        <input
+          type="text"
+          name="name"
+          className="modal__input"
+          value={name}
+          onChange={(e) => setName(e.target.value)}
+          placeholder="Name"
+          required
+        />
+      </label>
 
-      <input
-        type="password"
-        name="password"
-        className="modal__input"
-        placeholder="Password"
-        value={password}
-        onChange={(e) => setPassword(e.target.value)}
-        required
-      />
+      <label className="modal__label">
+        Avatar URL*
+        <input
+          type="url"
+          name="avatar"
+          className="modal__input"
+          value={avatar}
+          onChange={(e) => setAvatar(e.target.value)}
+          placeholder="Avatar URL"
+          required
+        />
+      </label>
 
       <button
         type="button"

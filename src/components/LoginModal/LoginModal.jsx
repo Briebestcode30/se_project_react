@@ -34,25 +34,29 @@ export default function LoginModal({
       onSubmit={handleSubmit}
       buttonText="Login"
     >
-      <input
-        type="email"
-        name="email"
-        className="modal__input"
-        placeholder="Email"
-        value={email}
-        onChange={(e) => setEmail(e.target.value)}
-        required
-      />
+      <label className="modal__label">
+        Email
+        <input
+          type="email"
+          name="email"
+          className="modal__input"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+          required
+        />
+      </label>
 
-      <input
-        type="password"
-        name="password"
-        className="modal__input"
-        placeholder="Password"
-        value={password}
-        onChange={(e) => setPassword(e.target.value)}
-        required
-      />
+      <label className="modal__label">
+        Password
+        <input
+          type="password"
+          name="password"
+          className="modal__input"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+          required
+        />
+      </label>
 
       <button
         type="button"
