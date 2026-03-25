@@ -1,56 +1,42 @@
-# What To Wear (WTWR)
+# WTWR (What to Wear?) - Front End
 
-**What To Wear (WTWR)** is a responsive React web application that helps users choose clothing items based on the current weather. The app fetches real-time weather data and suggests garments suitable for hot, warm, or cold conditions. Users can also add their own garments with associated weather types.
+This repository contains the front-end client for the WTWR application. Built with React, it interacts with the back-end API to display and manage clothing items.
 
----
-
-## 🚀 Features
-
-- Displays current weather information (temperature, condition, city)
-- Dynamically suggests clothing items based on weather conditions
-- Clickable clothing cards that open a preview modal
-- Add new garments using a modal form with validation
-- Fully responsive layout for desktop and mobile devices
-- Accessible UI with meaningful alt text and ARIA-friendly interactions
+**Current Sprint:** 15
 
 ---
 
-## Backend Repository
+## Project Description
 
-The backend for this project contains the server, API routes, user authentication, and database setup. You can find it here:
+The front-end allows users to:
 
-🔗 https://github.com/Briebestcode30/se_project_express
-
----
-
-## 🛠️ Technologies Used
-
-- **React 18** – building interactive UI components
-- **Vite** – fast development environment
-- **JavaScript (ES6+)** – application logic and API handling
-- **CSS (BEM methodology)** – component-based styling
-- **Fetch API** – retrieving weather data from OpenWeather API
-- **ESLint & Prettier** – maintaining code quality and formatting
+- Register and log in
+- View clothing items filtered by weather
+- Add, like, and delete clothing items
+- Maintain a responsive and interactive user interface
 
 ---
 
-## 🎥 Project Pitch Video
+## Technologies & Techniques
 
-Check out [this Loom video](https://www.loom.com/share/c8fd4613af3c4bd7bf7447b310b4fe4b), where I describe the What To Wear (WTWR) project, walk through the main features, and discuss some of the challenges I faced while building it.
-
----
-
-## 🖼️ Demo
-
-![WTWR Screenshot](./screenshots/wtwr-screenshot.png)
-
-_Add screenshots or GIFs here to showcase the UI._
+- React.js — building the user interface
+- React Router — client-side routing
+- Context API — authentication state management
+- Axios — HTTP requests to the back-end API
+- CSS / Flexbox / Grid — layout and styling
+- Form validation for secure input
+- Responsive design for multiple devices
 
 ---
 
-## 📦 Installation
+## Deployment
 
-1. Clone the repository:
-   ```bash
-   git clone https://github.com/Briebestcode30/se_project_react
-   ```
+- The front-end can be deployed on any static hosting service (Netlify, Vercel, GitHub Pages).
+- Make sure the deployed front-end points to the deployed back-end API.
+
+---
+
+## Repositories
+
+- Front-end repository: [https://github.com/Briebestcode30/se_project_react](https://github.com/Briebestcode30/se_project_react)
+- Back-end repository: [https://github.com/Briebestcode30/se_project_express](https://github.com/Briebestcode30/se_project_express)
