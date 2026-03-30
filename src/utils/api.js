@@ -1,4 +1,8 @@
-const baseUrl = process.env.REACT_APP_BASE_URL || "http://localhost:3001";
+const baseUrl =
+  typeof process !== "undefined" && process.env.REACT_APP_BASE_URL
+    ? process.env.REACT_APP_BASE_URL
+    : "http://localhost:3001";
+
 const defaultHeaders = {
   "Content-Type": "application/json",
 };
